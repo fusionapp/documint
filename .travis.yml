@@ -1,0 +1,18 @@
+branches:
+  only:
+  - master
+language: python
+sudo: false
+matrix:
+  include:
+  - python: pypy
+  - python: '2.7'
+install:
+- pip install .
+script:
+- "$(type -p trial) documint"
+notifications:
+  email: false
+  irc:
+    channels:
+      secure: bauftdqs43fEQF+0UeQEW6CKlZNmvIXst/AV95bLvSbsNsZNnKYznWbFgIaHFpRKfthksai9IEAbFd3BCG0w7/yGZAMvkD0Zq2Ts3Z3LCO2s8blpQzVIizVB1s7XRKGLPejKr7AGQrCA6Cn8s31w3seLjhGg0ElevJlCIUiqLZo=
