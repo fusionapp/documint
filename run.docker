@@ -8,4 +8,4 @@ COPY bin/css2xslfo /usr/bin/
 
 EXPOSE 8750
 
-ENTRYPOINT . /appenv/bin/activate && twistd -n documint
+ENTRYPOINT ["/appenv/bin/twistd", "-n", "documint"]
