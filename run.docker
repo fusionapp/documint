@@ -7,5 +7,5 @@ RUN . /appenv/bin/activate \
 COPY bin/css2xslfo /usr/bin/
 
 EXPOSE 8750
-
-ENTRYPOINT ["/appenv/bin/twistd", "-n", "documint"]
+WORKDIR "/appenv"
+ENTRYPOINT ["/appenv/bin/twistd", "-n", "--pidfile=", "documint"]
