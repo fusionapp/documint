@@ -1,0 +1,2 @@
+#!/bin/sh
+exec jarwrapper /usr/share/css2xslfo/css2xslfo.jar "$@"

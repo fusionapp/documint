@@ -1,0 +1,11 @@
+FROM fusionapp/documint-base
+
+RUN DEBIAN_FRONTEND=noninteraction apt-get install --no-install-recommends -qy fop css2xslfo
+COPY wheelhouse /wheelhouse
+RUN . /appenv/bin/activate \
+  && pip install --no-index -f /wheelhouse Documint
+COPY bin/css2xslfo /usr/bin/
+
+EXPOSE 8750
+WORKDIR "/appenv"
+ENTRYPOINT ["/appenv/bin/twistd", "-n", "--pidfile=", "documint"]
