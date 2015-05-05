@@ -7,6 +7,8 @@ RUN . /appenv/bin/activate \
 COPY bin/css2xslfo /usr/bin/
 COPY bin/clj-neon /usr/bin/
 COPY bin/clj-neon.jar /usr/share/clj-neon/
+COPY docker/fop.xconf /root/.config/documint/fop.xconf
+COPY fonts /appenv/fonts/
 
 EXPOSE 8750
 WORKDIR "/appenv"
