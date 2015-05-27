@@ -18,7 +18,7 @@ class MinterTests(TestCase):
         L{Minter.renderXHTML}.
         """
         minter = Minter()
-        minter.renderXHTML = lambda *a: succeed((a, 'application/pdf'))
+        minter._renderXHTML = lambda *a: succeed((a, 'application/pdf'))
         d = minter.render('markup', ['css1', 'css2'])
         d.addCallback(
             self.assertEquals,
@@ -38,7 +38,7 @@ class SimpleMinterTests(TestCase):
         """
         minter = SimpleMinter()
         minter.embedStylesheets = lambda *a: a
-        d = minter.renderXHTML('markup', ['css1', 'css2'])
+        d = minter._renderXHTML('markup', ['css1', 'css2'])
         d.addCallback(
             self.assertEquals, (('markup', ['css1', 'css2']), 'text/html'))
         return d
