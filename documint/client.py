@@ -11,7 +11,7 @@ from documint.commands import Render
 
 def render(protocol, markup, stylesheets):
     """
-    Execute the L{Render} command on an AMP protocol instance.
+    Execute the L{Render} AMP command.
     """
     return protocol.callRemote(
         Render,

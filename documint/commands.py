@@ -41,9 +41,12 @@ class Render(amp.Command):
 
 
 
-class Minter(amp.AMP):
+class Minter(amp.CommandLocator):
     """
-    Documint AMP protocol.
+    Documint command locator.
+
+    This implementation is for performing the full range of tasks that produce
+    PDF documents.
     """
     def embedStylesheets(self, markup, stylesheets):
         """
@@ -64,7 +67,21 @@ class Minter(amp.AMP):
             raise XMLSyntaxError(e)
 
 
-    def renderXHTML(self, markup, stylesheets):
+    def _handleExternalProcessError(self, f):
+        """
+        """
+        f.trap(ExternalProcessError)
+        return Failure(RemoteExternalProcessError(f.getErrorMessage()))
+
+
+    def _pdfResult(self, (data, contentType)):
+        """
+        """
+        return dict(data=data,
+                    contentType=contentType)
+
+
+    def _renderXHTML(self, markup, stylesheets):
         """
         Render I{XHMTL} markup and I{CSS} to a I{PDF}.
 
@@ -78,34 +95,28 @@ class Minter(amp.AMP):
         @return: Deferred that fires with the generated I{PDF} byte data and
             content type.
         """
-        def _handleExternalProcessError(f):
-            f.trap(ExternalProcessError)
-            return Failure(RemoteExternalProcessError(f.getErrorMessage()))
         d = renderXHTML(self.embedStylesheets(markup, stylesheets))
-        d.addErrback(_handleExternalProcessError)
+        d.addErrback(self._handleExternalProcessError)
         d.addCallback(lambda data: (data, 'application/pdf'))
         return d
 
 
     @Render.responder
     def render(self, markup, stylesheets):
-        d = self.renderXHTML(markup, stylesheets)
-        d.addCallback(
-            lambda (data, contentType):
-                dict(data=data,
-                     contentType=contentType))
+        d = self._renderXHTML(markup, stylesheets)
+        d.addCallback(self._pdfResult)
         return d
 
 
 
 class SimpleMinter(Minter):
     """
-    Simple Documint AMP protocol.
+    Documint command locator.
 
     The main difference between L{SimpleMinter} and L{Minter} is that
     L{SimpleMinter} will output I{XHTML}.
     """
-    def renderXHTML(self, markup, stylesheets):
+    def _renderXHTML(self, markup, stylesheets):
         """
         Embed I{CSS} in I{XHMTL} markup
 
