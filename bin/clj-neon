@@ -1,0 +1,2 @@
+#!/bin/sh
+exec jarwrapper /usr/bin/clj-neon.jar "$@"
