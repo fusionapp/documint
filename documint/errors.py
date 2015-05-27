@@ -51,3 +51,10 @@ class NoSuchFile(IOError):
     """
     The specified file could not be found.
     """
+
+
+
+class UnsupportedContentType(ValueError):
+    """
+    The specified content type is not supported.
+    """

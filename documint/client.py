@@ -5,7 +5,7 @@ from twisted.internet import task
 from twisted.internet.endpoints import clientFromString, connectProtocol
 from twisted.protocols.amp import AMP
 
-from documint.commands import Render
+from documint.commands import Certify, Render
 
 
 
@@ -20,7 +20,20 @@ def render(protocol, markup, stylesheets):
 
 
 
-__all__ = ['render']
+def certify(protocol, data, contentType, reason, location):
+    """
+    Execute the L{Certify} AMP command.
+    """
+    return protocol.callRemote(
+        Certify,
+        data=data,
+        contentType=contentType,
+        reason=reason,
+        location=location)
+
+
+
+__all__ = ['render', 'certify']
 
 
 

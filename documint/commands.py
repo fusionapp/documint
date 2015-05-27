@@ -7,8 +7,10 @@ from twisted.protocols import amp
 from twisted.python.failure import Failure
 
 from documint.errors import (
-    ExternalProcessError, RemoteExternalProcessError, XMLSyntaxError)
+    ExternalProcessError, RemoteExternalProcessError, UnsupportedContentType,
+    XMLSyntaxError)
 from documint.extproc.css2xslfo import renderXHTML
+from documint.extproc.neon import failingPDFSign
 from documint.mediumbox import BigString
 from documint.util import embedStylesheets
 
@@ -41,6 +43,26 @@ class Render(amp.Command):
 
 
 
+class Certify(amp.Command):
+    """
+    Sign a I{PDF} document with the configured keystore.
+    """
+    arguments = [
+        ('data', BigString()),
+        ('contentType', amp.String()),
+        ('reason', amp.String()),
+        ('location', amp.String())]
+
+    response = [
+        ('data', BigString()),
+        ('contentType', amp.String())]
+
+    errors = {
+        UnsupportedContentType: 'UNSUPPORTED_CONTENT_TYPE',
+        RemoteExternalProcessError: 'EXTERNAL_PROCESS_ERROR'}
+
+
+
 class Minter(amp.CommandLocator):
     """
     Documint command locator.
@@ -48,6 +70,15 @@ class Minter(amp.CommandLocator):
     This implementation is for performing the full range of tasks that produce
     PDF documents.
     """
+    def __init__(self, signPDF=failingPDFSign):
+        """
+        @param signPDF: Something like L{documint.extproc.neon.signPDF} with the
+            keystore, keystore password and private key parameters already
+            partially applied.
+        """
+        self._signPDF = signPDF
+
+
     def embedStylesheets(self, markup, stylesheets):
         """
         Embed external stylesheets in I{XHTML} markup.
@@ -69,13 +100,15 @@ class Minter(amp.CommandLocator):
 
     def _handleExternalProcessError(self, f):
         """
+        Convert L{ExternalProcessError} into L{RemoteExternalProcessError}.
         """
         f.trap(ExternalProcessError)
         return Failure(RemoteExternalProcessError(f.getErrorMessage()))
 
 
-    def _pdfResult(self, (data, contentType)):
+    def _dataResult(self, (data, contentType)):
         """
+        Convert a 2-tuple of data and content type into a dict.
         """
         return dict(data=data,
                     contentType=contentType)
@@ -104,7 +137,29 @@ class Minter(amp.CommandLocator):
     @Render.responder
     def render(self, markup, stylesheets):
         d = self._renderXHTML(markup, stylesheets)
-        d.addCallback(self._pdfResult)
+        d.addCallback(self._dataResult)
+        return d
+
+
+    def _certifyDocument(self, data, contentType, reason, location):
+        """
+        Sign a I{PDF} document.
+        """
+        if contentType != 'application/pdf':
+            raise UnsupportedContentType(
+                'Only PDF content can be certified, got: {!r}'.format(contentType))
+        d = self._signPDF(data=data,
+                          reason=reason,
+                          location=location)
+        d.addErrback(self._handleExternalProcessError)
+        d.addCallback(lambda data: (data, 'application/pdf'))
+        return d
+
+
+    @Certify.responder
+    def certify(self, data, contentType, reason, location):
+        d = self._certifyDocument(data, contentType, reason, location)
+        d.addCallback(self._dataResult)
         return d
 
 
@@ -135,4 +190,4 @@ class SimpleMinter(Minter):
 
 
 
-__all__ = ['Render', 'Minter', 'SimpleMinter']
+__all__ = ['Render', 'Minter', 'SimpleMinter', 'Certify']

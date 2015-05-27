@@ -1,3 +1,5 @@
+from functools import partial
+
 from twisted.application import strports
 from twisted.application.service import IServiceMaker
 from twisted.internet import reactor
@@ -7,13 +9,18 @@ from twisted.protocols.amp import AMP
 from twisted.python import usage
 from zope.interface import implementer
 
-from documint.commands import Minter, SimpleMinter
+from documint.commands import Minter
+from documint.extproc.neon import signPDF, failingPDFSign
 
 
 
 class Options(usage.Options):
     optParameters = [
-        ['port', 'p', 'tcp:8750', 'Documint service strport description']]
+        ['port', 'p', 'tcp:8750', 'Documint service strport description'],
+        ['keystore', None, None, 'Java keystore path'],
+        ['password', None, None, 'Keystore password'],
+        ['privateKeyPassword', None, None,
+         'Password for the private key in the keystore']]
 
 
 
@@ -22,6 +29,23 @@ class DocumintServiceMaker(object):
     tapname = 'documint'
     description = 'Document creation service'
     options = Options
+
+
+    def _signPDF(self, options):
+        """
+        """
+        keystorePath = options['keystore']
+        if keystorePath is None:
+            return failingPDFSign
+        keystorePassword = options['password']
+        if keystorePassword is None:
+            return failingPDFSign
+        privateKeyPassword = options['privateKeyPassword']
+        return partial(
+            signPDF,
+            keystorePath=keystorePath,
+            keystorePassword=keystorePassword,
+            privateKeyPassword=privateKeyPassword)
 
 
     def makeService(self, options):
