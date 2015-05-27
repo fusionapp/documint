@@ -33,6 +33,8 @@ class DocumintServiceMaker(object):
 
     def _signPDF(self, options):
         """
+        L{documint.extproc.neon.signPDF} with keystore, keystore password and
+        private key password partially applied.
         """
         keystorePath = options['keystore']
         if keystorePath is None:
