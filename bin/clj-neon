@@ -1,2 +1,2 @@
 #!/bin/sh
-exec jarwrapper /usr/bin/clj-neon.jar "$@"
+exec jarwrapper /usr/share/clj-neon/clj-neon.jar "$@"
