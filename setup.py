@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="Documint",
-    version="15.5.0",
+    version="15.7.0",
     url="https://github.com/fusionapp/documint",
     classifiers=[
         'Development Status :: 3 - Alpha',
