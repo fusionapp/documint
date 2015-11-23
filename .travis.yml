@@ -4,7 +4,7 @@ branches:
 language: python
 cache:
   directories:
-    - $HOME/.cache/pip
+  - "$HOME/.cache/pip"
 sudo: false
 matrix:
   include:
@@ -21,3 +21,5 @@ notifications:
   irc:
     channels:
       secure: bauftdqs43fEQF+0UeQEW6CKlZNmvIXst/AV95bLvSbsNsZNnKYznWbFgIaHFpRKfthksai9IEAbFd3BCG0w7/yGZAMvkD0Zq2Ts3Z3LCO2s8blpQzVIizVB1s7XRKGLPejKr7AGQrCA6Cn8s31w3seLjhGg0ElevJlCIUiqLZo=
+  slack:
+    secure: JmRxn6koP4wuSjWHtxSEKfMfgjVZ1U3X9b5jZpo9j4TpRZl9WWMMfJImZEYnPzxoNp8FuUD73dfQntlqUZYNGaLAE/27pnmDggKdy3Aw6y7nr8wIV4dxzSaHVUiDQAz41PBi7ld3Dl/Garg8rcnqef8Wu1u1G/ZBtGnij1tdLSg=
