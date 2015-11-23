@@ -7,4 +7,4 @@ ENV PIP_WHEEL_DIR=/wheelhouse
 ENV PIP_FIND_LINKS=/wheelhouse
 ENTRYPOINT . /appenv/bin/activate \
   && cd /application \
-  && pip wheel . 'cryptography<1.0'
+  && pip wheel . 'cryptography<1.0' 'lxml<3.5'
