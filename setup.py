@@ -15,5 +15,5 @@ setup(
         'Topic :: Text Processing :: Markup :: HTML',
         ],
     packages=find_packages() + ['twisted.plugins'],
-    install_requires=['Twisted', 'lxml'],
+    install_requires=['Twisted[tls]', 'lxml'],
     include_package_data=True)

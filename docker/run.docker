@@ -2,7 +2,7 @@ FROM fusionapp/documint-base
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -qy fop css2xslfo
 COPY wheelhouse /wheelhouse
-RUN /appenv/bin/pip install --no-index -f /wheelhouse Documint
+RUN /appenv/bin/pip install --no-index -f /wheelhouse Documint lxml==3.4.0.cffi.1
 COPY bin/css2xslfo /usr/bin/
 COPY bin/clj-neon /usr/bin/
 COPY bin/clj-neon.jar /usr/share/clj-neon/
