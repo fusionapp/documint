@@ -10,15 +10,23 @@ matrix:
   include:
   - python: pypy
   - python: '2.7'
+  allow_failures:
+  - python: pypy
 install:
+- |
+  if [ "${TRAVIS_PYTHON_VERSION}" == "pypy" ]; then
+    git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+    PYENV_ROOT="$HOME/.pyenv"
+    PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    pyenv install pypy-4.0.1
+    pyenv global pypy-4.0.1
+  fi
 - pip install -U pip setuptools wheel
 - pip install -r requirements.txt
 script:
 - "$(type -p trial) documint"
 notifications:
   email: false
-  irc:
-    channels:
-      secure: bauftdqs43fEQF+0UeQEW6CKlZNmvIXst/AV95bLvSbsNsZNnKYznWbFgIaHFpRKfthksai9IEAbFd3BCG0w7/yGZAMvkD0Zq2Ts3Z3LCO2s8blpQzVIizVB1s7XRKGLPejKr7AGQrCA6Cn8s31w3seLjhGg0ElevJlCIUiqLZo=
   slack:
     secure: JmRxn6koP4wuSjWHtxSEKfMfgjVZ1U3X9b5jZpo9j4TpRZl9WWMMfJImZEYnPzxoNp8FuUD73dfQntlqUZYNGaLAE/27pnmDggKdy3Aw6y7nr8wIV4dxzSaHVUiDQAz41PBi7ld3Dl/Garg8rcnqef8Wu1u1G/ZBtGnij1tdLSg=
