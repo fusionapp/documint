@@ -4,9 +4,9 @@ lxml-cffi==3.4.0; platform_python_implementation == 'PyPy'
 lxml==3.5.0; platform_python_implementation != 'PyPy'
 cryptography==0.9.3; platform_python_implementation == 'PyPy'
 cryptography==1.1.1; platform_python_implementation != 'PyPy'
-enum34==1.0.4
+enum34==1.1.2
 idna==2.0
-ipaddress==1.0.15
+ipaddress==1.0.16
 pyasn1==0.1.9
 six==1.10.0
 Twisted[tls]==15.5.0
