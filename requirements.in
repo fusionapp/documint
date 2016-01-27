@@ -1,0 +1,4 @@
+-e .
+cffi==1.5.0; platform_python_implementation != 'PyPy'
+lxml-cffi==3.4.0; platform_python_implementation == 'PyPy'
+lxml==3.5.0; platform_python_implementation != 'PyPy'
