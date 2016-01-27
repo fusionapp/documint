@@ -1,6 +1,6 @@
 FROM fusionapp/documint-base
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -qy fop css2xslfo
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -qy fop css2xslfo
 COPY wheelhouse /wheelhouse
 RUN /appenv/bin/pip install --no-index -f /wheelhouse Documint
 COPY bin/css2xslfo /usr/bin/
