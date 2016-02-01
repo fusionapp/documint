@@ -1,5 +1,0 @@
-FROM debian:jessie
-
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -qy virtualenv pypy libffi6 libssl1.0.0 libxml2 libxslt1.1 zlib1g ca-certificates
-RUN virtualenv -p /usr/bin/pypy /appenv
-RUN . /appenv/bin/activate && pip install --upgrade pip setuptools
