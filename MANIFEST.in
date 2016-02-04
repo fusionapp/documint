@@ -1,1 +1,3 @@
 graft documint/test/data
+include versioneer.py
+include documint/_version.py

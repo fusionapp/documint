@@ -1,10 +1,12 @@
+import versioneer
 from setuptools import find_packages, setup
 
 
 
 setup(
     name="Documint",
-    version="15.7.0",
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     url="https://github.com/fusionapp/documint",
     classifiers=[
         'Development Status :: 3 - Alpha',
