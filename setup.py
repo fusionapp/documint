@@ -17,9 +17,5 @@ setup(
         'Topic :: Text Processing :: Markup :: HTML',
         ],
     packages=find_packages() + ['twisted.plugins'],
-    install_requires=['Twisted[tls]'],
-    extras_require={
-        ':platform_python_implementation=="PyPy"': ['lxml-cffi'],
-        ':platform_python_implementation!="PyPy"': ['lxml'],
-        },
+    install_requires=['Twisted[tls]', 'lxml>=3.6.0'],
     include_package_data=True)
