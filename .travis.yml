@@ -10,8 +10,6 @@ matrix:
   include:
   - python: pypy
   - python: '2.7'
-  allow_failures:
-  - python: pypy
 install:
 - |
   if [ "${TRAVIS_PYTHON_VERSION}" == "pypy" ]; then
