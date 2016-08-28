@@ -6,9 +6,10 @@ COPY bin/css2xslfo /usr/bin/
 COPY bin/clj-neon /usr/bin/
 COPY docker/fop.xconf /root/.config/documint/fop.xconf
 COPY fonts /appenv/fonts/
-COPY wheelhouse /wheelhouse
 COPY requirements.txt /application/requirements.txt
-RUN /appenv/bin/pip install --no-index -f /wheelhouse -r /application/requirements.txt Documint
+RUN /appenv/bin/pip install --no-cache-dir --requirement /application/requirements.txt
+COPY . /application
+RUN /appenv/bin/pip install --no-cache-dir /application
 RUN /appenv/bin/trial --temp-directory=/tmp/_trial_temp --reporter=text documint \
   && rm -rf /tmp/_trial_temp
 
