@@ -1,0 +1,29 @@
+cache:
+  mount:
+    - /drone/pip-cache
+build:
+  wheels:
+    image: fusionapp/base
+    pull: true
+    environment:
+      - PIP_DISABLE_PIP_VERSION_CHECK=1
+      - PIP_CACHE_DIR=/drone/pip-cache
+    commands:
+      - /appenv/bin/pip install --requirement requirements.txt .
+      - /appenv/bin/trial documint
+publish:
+  docker:
+    registry: scarlet.fusionapp.com:5001
+    mirror: https://scarlet.fusionapp.com:5002
+    insecure: false
+    repo: fusionapp/documint
+    tag: $$BRANCH
+#    when:
+#      branch: [master]
+notify:
+  slack:
+    webhook_url: $$SLACK_URL
+    channel: general
+    username: drone
+#branches:
+#  - master
