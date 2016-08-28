@@ -10,8 +10,6 @@ COPY requirements.txt /application/requirements.txt
 RUN /appenv/bin/pip install --no-cache-dir --requirement /application/requirements.txt
 COPY . /application
 RUN /appenv/bin/pip install --no-cache-dir /application
-RUN /appenv/bin/trial --temp-directory=/tmp/_trial_temp --reporter=text documint \
-  && rm -rf /tmp/_trial_temp
 
 EXPOSE 8750
 WORKDIR "/appenv"
