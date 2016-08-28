@@ -1,3 +1,4 @@
+import os
 from functools import partial
 
 from twisted.application import strports
@@ -10,7 +11,7 @@ from twisted.python import usage
 from zope.interface import implementer
 
 from documint.commands import Minter
-from documint.extproc.neon import signPDF, failingPDFSign
+from documint.extproc.neon import failingPDFSign, signPDF
 
 
 
@@ -37,7 +38,7 @@ class DocumintServiceMaker(object):
         private key password partially applied.
         """
         keystorePath = options['keystore']
-        if keystorePath is None:
+        if keystorePath is None or not os.path.exists(keystorePath):
             return failingPDFSign
         keystorePassword = options['password']
         if keystorePassword is None:
