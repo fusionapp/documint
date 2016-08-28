@@ -15,3 +15,6 @@ RUN /appenv/bin/trial --temp-directory=/tmp/_trial_temp --reporter=text documint
 EXPOSE 8750
 WORKDIR "/appenv"
 ENTRYPOINT ["/appenv/bin/twistd", "-n", "--pidfile=", "documint"]
+CMD ["--keystore", "/srv/documint/keystore.jks", \
+     "--password", "123456", \
+     "--privateKeyPassword", "123456"]
