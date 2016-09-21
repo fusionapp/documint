@@ -4,20 +4,20 @@
 #
 #    pip-compile requirements.in
 #
-cffi==1.7.0; platform_python_implementation != 'PyPy'
+cffi==1.8.3; platform_python_implementation != 'PyPy'
 characteristic==14.3.0    # via service-identity
 cryptography==1.5       # via pyopenssl
 enum34==1.1.6             # via cryptography
 idna==2.1                 # via cryptography, twisted
-ipaddress==1.0.16         # via cryptography
+ipaddress==1.0.17         # via cryptography
 lxml==3.6.4
 pyasn1-modules==0.0.8     # via service-identity
 pyasn1==0.1.9             # via cryptography, pyasn1-modules, service-identity
 pyopenssl==16.1.0         # via service-identity, twisted
 service-identity==16.0.0  # via twisted
 six==1.10.0               # via cryptography, pyopenssl
-Twisted[tls]==16.4.0
-zope.interface==4.2.0     # via twisted
+Twisted[tls]==16.4.1
+zope.interface==4.3.2     # via twisted
 
 # The following packages are commented out because they are
 # considered to be unsafe in a requirements file:
