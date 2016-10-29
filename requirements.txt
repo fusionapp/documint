@@ -16,7 +16,7 @@ pyasn1==0.1.9             # via cryptography, pyasn1-modules, service-identity
 pyopenssl==16.2.0         # via service-identity, twisted
 service-identity==16.0.0  # via twisted
 six==1.10.0               # via cryptography, pyopenssl
-Twisted[tls]==16.4.1
+Twisted[tls]==16.5.0
 zope.interface==4.3.2     # via twisted
 
 # The following packages are commented out because they are
