@@ -18,12 +18,12 @@ publish:
     insecure: false
     repo: fusionapp/documint
     tag: $$BRANCH
-#    when:
-#      branch: [master]
+    when:
+      branch: [master]
 notify:
   slack:
     webhook_url: $$SLACK_URL
     channel: general
     username: drone
-#branches:
-#  - master
+branches:
+  - master
