@@ -6,7 +6,7 @@
 #
 cffi==1.9.1; platform_python_implementation != 'PyPy'
 characteristic==14.3.0    # via service-identity
-cryptography==1.7.1       # via pyopenssl
+cryptography==1.7.2       # via pyopenssl
 enum34==1.1.6             # via cryptography
 idna==2.2                 # via cryptography, twisted
 ipaddress==1.0.18         # via cryptography
