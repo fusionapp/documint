@@ -10,7 +10,7 @@ cryptography==1.7.2       # via pyopenssl
 enum34==1.1.6             # via cryptography
 idna==2.2                 # via cryptography, twisted
 ipaddress==1.0.18         # via cryptography
-lxml==3.7.2
+lxml==3.7.3
 pyasn1-modules==0.0.8     # via service-identity
 pyasn1==0.2.2             # via cryptography, pyasn1-modules, service-identity
 pyopenssl==16.2.0         # via service-identity, twisted
