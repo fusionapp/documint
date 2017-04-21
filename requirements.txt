@@ -17,7 +17,7 @@ pyopenssl==17.0.0         # via service-identity, twisted
 service-identity==16.0.0  # via twisted
 six==1.10.0               # via cryptography, pyopenssl
 Twisted[tls]==17.1.0
-zope.interface==4.3.3     # via twisted
+zope.interface==4.4.0     # via twisted
 
 # The following packages are commented out because they are
 # considered to be unsafe in a requirements file:
