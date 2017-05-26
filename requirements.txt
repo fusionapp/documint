@@ -9,7 +9,7 @@ attrs==17.1.0
 automat==0.6.0
 cffi==1.10.0; platform_python_implementation != 'PyPy'
 constantly==15.1.0
-cryptography==1.8.1
+cryptography==1.8.2
 enum34==1.1.6
 idna==2.5
 incremental==17.5.0
