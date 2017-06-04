@@ -5,6 +5,7 @@ language: python
 cache:
   directories:
   - "$HOME/.cache/pip"
+  - "$HOME/fusion-pyenv-cache"
 sudo: false
 dist: trusty
 matrix:
@@ -15,6 +16,7 @@ install:
 - |
   git clone https://github.com/yyuu/pyenv.git $HOME/fusion-pyenv
   export PYENV_ROOT="$HOME/fusion-pyenv"
+  export PYENV_BUILD_CACHE_PATH="$HOME/fusion-pyenv-cache"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
   pyenv install $PYTHON_VERSION
