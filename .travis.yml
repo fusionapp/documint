@@ -14,8 +14,8 @@ matrix:
 install:
 - |
   git clone https://github.com/yyuu/pyenv.git $HOME/fusion-pyenv
-  PYENV_ROOT="$HOME/fusion-pyenv"
-  PATH="$PYENV_ROOT/bin:$PATH"
+  export PYENV_ROOT="$HOME/fusion-pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
   pyenv install $PYTHON_VERSION
   pyenv global $PYTHON_VERSION
