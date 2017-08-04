@@ -9,14 +9,14 @@ attrs==17.2.0
 automat==0.6.0
 cffi==1.10.0; platform_python_implementation != 'PyPy'
 constantly==15.1.0
-cryptography==2.0
+cryptography==2.0.3
 enum34==1.1.6
 idna==2.5
 incremental==17.5.0
 ipaddress==1.0.18
 lxml==3.8.0
 packaging==16.8
-pyasn1-modules==0.0.9
+pyasn1-modules==0.0.10
 pyasn1==0.3.1
 pycparser==2.18; platform_python_implementation != 'PyPy'
 pyopenssl==17.2.0
