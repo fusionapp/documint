@@ -1,6 +1,8 @@
 branches:
   only:
   - master
+  - staging
+  - trying
 language: python
 cache:
   directories:
