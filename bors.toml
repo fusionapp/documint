@@ -1,0 +1,8 @@
+status = [
+    "continuous-integration/travis-ci/push"
+]
+block_labels = ["Wait to merge ✋"]
+pr_status = [
+    "code-review/reviewable"
+]
+delete_merged_branches = true
