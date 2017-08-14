@@ -6,3 +6,4 @@ pr_status = [
     "code-review/reviewable"
 ]
 delete_merged_branches = true
+cut_body_after = "<!-- Reviewable:start -->"
