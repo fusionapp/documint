@@ -16,7 +16,7 @@ incremental==17.5.0
 ipaddress==1.0.18
 lxml==3.8.0
 packaging==16.8
-pyasn1-modules==0.0.11
+pyasn1-modules==0.1.1
 pyasn1==0.3.3
 pycparser==2.18; platform_python_implementation != 'PyPy'
 pyopenssl==17.2.0
