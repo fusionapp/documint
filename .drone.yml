@@ -39,7 +39,9 @@ pipeline:
   publish:
     image: plugins/docker
     repo: eu.gcr.io/fusion-168903/documint
-    tags: ${DRONE_BRANCH}
+    tags:
+      - ${DRONE_BRANCH}
+      - git-${DRONE_COMMIT_SHA}
     registry: eu.gcr.io
     mirror: https://eu-mirror.gcr.io
     username: _json_key
