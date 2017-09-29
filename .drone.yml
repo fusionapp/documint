@@ -1,29 +1,94 @@
-cache:
-  mount:
-    - /drone/pip-cache
-build:
-  wheels:
+pipeline:
+  restore_cache:
+    image: appleboy/drone-sftp-cache
+    server: sftp-cache.drone7.non-production.fusionapp.com
+    port: 45945
+    username: drone-cache
+    path: /drone-cache
+    restore: true
+    ignore_branch: true
+    mount:
+      - /drone/pip-cache
+    secrets:
+      - sftp_cache_password
+  build:
     image: fusionapp/base
     pull: true
     environment:
       - PIP_DISABLE_PIP_VERSION_CHECK=1
       - PIP_CACHE_DIR=/drone/pip-cache
     commands:
+      - mkdir -p $PIP_CACHE_DIR
       - /appenv/bin/pip install --requirement requirements.txt .
       - /appenv/bin/trial documint
-publish:
-  docker:
-    registry: scarlet.fusionapp.com:5001
-    mirror: https://scarlet.fusionapp.com:5002
-    insecure: false
-    repo: fusionapp/documint
-    tag: $$BRANCH
+  rebuild_cache:
+    image: appleboy/drone-sftp-cache
+    server: sftp-cache.drone7.non-production.fusionapp.com
+    port: 45945
+    username: drone-cache
+    path: /drone-cache
+    rebuild: true
+    ignore_branch: true
+    mount:
+      - /drone/pip-cache
     when:
-      branch: [master]
-notify:
+      event: push
+      branch: master
+    secrets:
+      - sftp_cache_password
+  publish:
+    image: plugins/docker
+    repo: eu.gcr.io/fusion-168903/documint
+    tags: ${DRONE_BRANCH}
+    registry: eu.gcr.io
+    mirror: https://eu-mirror.gcr.io
+    username: _json_key
+    when:
+      event: push
+      branch: master
+    secrets:
+      - docker_password
+  deploy-uat:
+    image: peloton/drone-rancher
+    url: https://rancher.fusionapp.com
+    service: Fusion/documint
+    docker_image: eu.gcr.io/fusion-168903/documint:git-${DRONE_COMMIT_SHA}
+    start_first: false
+    confirm: true
+    timeout: 120
+    when:
+      event: push
+      branch: master
+    secrets:
+      - source: rancher_nonprod_access_key
+        target: rancher_access_key
+      - source: rancher_nonprod_secret_key
+        target: rancher_secret_key
+  deploy-production:
+    image: peloton/drone-rancher
+    url: https://rancher.fusionapp.com
+    service: fusion/documint
+    docker_image: eu.gcr.io/fusion-168903/documint:git-${DRONE_COMMIT_SHA}
+    start_first: false
+    confirm: true
+    timeout: 120
+    when:
+      event: deployment
+      environment: production
+    secrets:
+      - source: rancher_prod_access_key
+        target: rancher_access_key
+      - source: rancher_prod_secret_key
+        target: rancher_secret_key
   slack:
-    webhook_url: $$SLACK_URL
-    channel: general
-    username: drone
+    image: plugins/slack
+    secrets:
+      - slack_webhook
+    when:
+      status:
+        - success
+        - failure
 branches:
   - master
+  - staging
+  - trying
