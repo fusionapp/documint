@@ -58,7 +58,7 @@ pipeline:
     timeout: 120
     when:
       event: push
-      branch: uat
+      branch: master
     secrets:
       - source: rancher_nonprod_access_key
         target: rancher_access_key
