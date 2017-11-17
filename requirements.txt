@@ -22,6 +22,6 @@ pycparser==2.18; platform_python_implementation != 'PyPy'
 pyopenssl==17.3.0
 pyparsing==2.2.0
 service-identity==17.0.0
-six==1.10.0
+six==1.11.0
 twisted[tls]==17.5.0
-zope.interface==4.4.2
+zope.interface==4.4.3
