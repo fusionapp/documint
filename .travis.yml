@@ -10,6 +10,7 @@ cache:
   - "$HOME/fusion-pyenv-cache"
 sudo: false
 dist: trusty
+group: edge
 matrix:
   include:
   - env: PYTHON_VERSION=pypy-5.9.0
