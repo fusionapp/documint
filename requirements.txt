@@ -17,7 +17,7 @@ ipaddress==1.0.18
 lxml==4.1.1
 packaging==16.8
 pyasn1-modules==0.2.1
-pyasn1==0.3.7
+pyasn1==0.4.2
 pycparser==2.18; platform_python_implementation != 'PyPy'
 pyopenssl==17.3.0
 pyparsing==2.2.0
