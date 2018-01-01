@@ -4,7 +4,7 @@
 #
 #    pip-compile --no-annotate --output-file requirements.txt requirements.in
 #
-asn1crypto==0.23.0
+asn1crypto==0.24.0
 attrs==17.3.0
 automat==0.6.0
 cffi==1.11.2; platform_python_implementation != 'PyPy'
