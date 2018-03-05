@@ -7,7 +7,7 @@
 asn1crypto==0.24.0
 attrs==17.4.0
 automat==0.6.0
-cffi==1.11.4; platform_python_implementation != 'PyPy'
+cffi==1.11.5; platform_python_implementation != 'PyPy'
 constantly==15.1.0
 cryptography==2.1.4
 enum34==1.1.6
