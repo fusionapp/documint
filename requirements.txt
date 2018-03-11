@@ -7,7 +7,7 @@
 asn1crypto==0.24.0
 attrs==17.4.0
 automat==0.6.0
-cffi==1.11.4; platform_python_implementation != 'PyPy'
+cffi==1.11.5; platform_python_implementation != 'PyPy'
 constantly==15.1.0
 cryptography==2.1.4
 enum34==1.1.6
@@ -15,7 +15,7 @@ idna==2.6
 incremental==17.5.0
 ipaddress==1.0.19
 lxml==4.1.1
-packaging==16.8
+packaging==17.1
 pyasn1-modules==0.2.1
 pyasn1==0.4.2
 pycparser==2.18; platform_python_implementation != 'PyPy'
