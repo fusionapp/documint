@@ -5,7 +5,7 @@
 #    pip-compile --no-annotate --output-file requirements.txt requirements.in
 #
 asn1crypto==0.24.0
-attrs==17.4.0
+attrs==18.1.0
 automat==0.6.0
 cffi==1.11.5; platform_python_implementation != 'PyPy'
 constantly==15.1.0
@@ -23,5 +23,5 @@ pyopenssl==17.5.0
 pyparsing==2.2.0
 service-identity==17.0.0
 six==1.11.0
-twisted[tls]==17.9.0
-zope.interface==4.4.3
+twisted[tls]==18.4.0
+zope.interface==4.5.0
